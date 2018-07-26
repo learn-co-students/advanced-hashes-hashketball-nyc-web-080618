@@ -119,33 +119,21 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-player_points = nil
-  game_hash.each do  |location, team_data|
-    
-    team_data.each do |attribute, data|
-      
-      if attribute == :players
-        data.each do |name, values|
-          
-          
-          if name == player_name
-            values.each do |stat, figure|
-              
-              if stat == :points
-                player_points = figure
-              end
-            end  
-          end  
-        end
-      end  
+    game_hash.each do |home_away, keys|
+    keys[:players].each do |player|
+      return player[:points].to_i if player[:player_name] == player_name
     end
   end
-  player_points
-+end
+end
+
 
 
 def shoe_size(name)
-  
+    game_hash.each do |home_away, keys|
+    keys[:players].each do |player|
+      return player[:shoe].to_i if player[:player_name] == name
+    end
+  end
 end 
 
 
@@ -170,8 +158,13 @@ def team_names
 end 
 team_names 
 
-def player_numbers(team_name)
 
+def player_numbers(team_name)
+    game_hash.each do |home_away, keys|
+    if keys[:team_name] == team_name
+      return = keys[:players].map { |player| player[:number] }
+    end
+  end
 end 
 
 
