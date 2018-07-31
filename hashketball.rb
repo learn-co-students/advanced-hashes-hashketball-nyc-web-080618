@@ -191,8 +191,8 @@ def player_stats(name)
   game_hash.each do |key, value|
     value.each do |k, v|
       if k == :players
-        v.each do |player_name, item|
-          if player_name == name
+        v.each do |p_name, item|
+          if p_name == name
             new_hash = item
           end
         end
@@ -204,7 +204,7 @@ end
 
 def big_shoe_rebounds
   #returns the number of rebound of the
-  rebounds = ""
+  rebounds = 0
   shoe_size = 0
 
   game_hash.each do |key, value|
