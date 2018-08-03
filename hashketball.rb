@@ -110,7 +110,7 @@ def game_hash
        :slam_dunks => 0
       },
 
-     "Bredan Haywood" => {
+     "Brendan Haywood" => {
        :number => 33, 
        :shoe => 15, 
        :points => 6, 
@@ -127,38 +127,31 @@ def game_hash
 end
 
 def num_points_scored(name)
-  arr = []
+ arr = []
   game_hash.each do |location, contituents|
-    # contituents = hashes of team name, colors, players list
-    contituents.each do |key, value| 
-      # key = symbol of team name, colors, players list
-      # value = name, color, players list
-      if value.class == Hash  # Omly players has hashes
-        value.each do |key, value| 
-          if key == name
-          arr << value[:points]
-         end
+    contituents.each do |key, value|
+      if key == :players
+       value.each do |key, value|
+        if key == name
+        arr << value[:points]
         end
+       end
       end
     end
   end
-  # binding.pry
   arr.first
 end
 
 def shoe_size(name) 
   arr = []
   game_hash.each do |location, contituents|
-    # contituents = hashes of team name, colors, players list
-    contituents.each do |key, value| 
-      # key = symbol of team name, colors, players list
-      # value = name, color, players list
-      if value.class == Hash  # Omly players has hashes
-        value.each do |key, value| 
-          if key == name
-          arr << value[:shoe]
-         end
+    contituents.each do |key, value|
+      if key == :players
+       value.each do |key, value|
+        if key == name
+        arr << value[:shoe]
         end
+       end
       end
     end
   end
@@ -216,6 +209,23 @@ def player_stats(name)
   arr.first
 end
 
+def big_shoe_rebounds
+  biggest = 0
+  rebounds = []
+    game_hash.each do |location, contituents|
+      contituents.each do |key, value|
+        if key == :players
+          value.each do |key, value|
+            if value[:shoe] > biggest
+              biggest = value[:shoe]
+              rebounds << value[:rebounds]
+            end
+          end
+        end
+      end
+    end
+  rebounds.first
+end
 
-p num_points_scored("Bredan Haywood")
+
 
