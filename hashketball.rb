@@ -4,7 +4,7 @@ def game_hash
  hash = {
   :home => {
     :team_name => "Brooklyn Nets", 
-    :colors => "Black, White",
+    :colors => ["Black", "White"],
     :players => {
       "Alan Anderson" => {
         :number => 0, 
@@ -64,7 +64,7 @@ def game_hash
   },
   :away => {
     :team_name => "Charlotte Hornets", 
-    :colors => "Turquoise, Purple",
+    :colors => ["Turquoise", "Purple"],
     :players => {
       "Jeff Adrien" => {
         :number => 4, 
@@ -162,11 +162,13 @@ def team_colors(team)
   arr = []
   game_hash.each do |key, value|
     if value[:team_name] == team
-    arr <<value[:colors]
+    arr = value[:colors]
     end
-    end
-  arr.join("").gsub(",","").split(" ")
+  end
+  arr
 end
+
+p team_colors("Brooklyn Nets")
 
 def team_names
   arr = []
